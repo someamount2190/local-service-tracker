@@ -1,0 +1,39 @@
+{
+  "name": "local-service-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Live availability tracker for local services (bike docks, gyms, libraries, parking, clinics). Pulls real open data + synthetic sources, handles stale/missing data, refreshes on a schedule.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:setup": "tsx src/db/migrate.ts",
+    "seed": "tsx scripts/seed.ts",
+    "refresh": "tsx scripts/refresh.ts",
+    "refresh:http": "tsx scripts/refresh.ts --http"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "drizzle-orm": "^0.45.2",
+    "next": "^15.5.19",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.2.15",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "drizzle-kit": "^0.31.10",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "comment": "overrides force patched transitive versions of two DEV/BUILD-TIME-only advisories (esbuild dev-server SSRF via drizzle-kit's deprecated loader; postcss CSS-stringify XSS bundled in Next) without downgrading next/drizzle-kit. Do NOT run `npm audit fix --force` — it downgrades next to v9 and breaks the app.",
+  "overrides": {
+    "esbuild": "^0.25.0",
+    "postcss": "^8.5.10"
+  }
+}
